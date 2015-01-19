@@ -18,25 +18,6 @@ git clone git://repo.or.cz/conkeror.git
 ```
 * Call `make` in the resulting folder.
 
-
-# Get this repository #
-
-* Clone it
-
-```bash
-git clone https://github.com/sleepomeno/conkerorrc.git
-```
-
-* Initialize the *theme* submodule(s) from the root folder of the repo
-folder.
-
-```bash
-git submodule update --init
-```
-
-* Set the `themes` variable in [conkerorrc.js](conkerorrc.js) to the
-path of the *theme* directory! And make other changes as you like ;)
-
 # Install the add-ons #
 
 We need to install the add-ons, otherwise our configuration won't
@@ -54,14 +35,21 @@ xulrunner <CONKEROR_REPO>/application.ini
 Press `Meta-x` (or `Alt-x`) and type `extensions` in the mini buffer. Install the
 add-ons from the files. Close Conkeror.
 
-# Sym-Link the configuration file #
+
+# Get this repository #
+
+* Clone it
 
 ```bash
-ln -s <THIS_REPO>/conkerorrc.js ~/.conkerorrc
+git clone https://github.com/sleepomeno/conkerorrc.git ~/.conkerorrc
 ```
-Conkeror expects the configuration file `.conkerorrc` in your home
-directory.
 
+* Initialize the submodules from the root folder of the repo
+folder.
+
+```bash
+git submodule update --init
+```
 > Happy Browsing!
 
 

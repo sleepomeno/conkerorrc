@@ -1,4 +1,4 @@
-var themes = "/home/greg/conkerorrc/theme";
+var themes = "~/.conkerorrc/theme";
 
 load_paths.unshift("chrome://conkeror-contrib/content/");
 theme_load_paths.unshift(themes);
@@ -112,7 +112,6 @@ require("reddit");
 require("gmail");
 require("feedly");
 require("twitter");
-require("facebook");
 
 page_mode_deactivate(stackexchange_mode);
 page_mode_deactivate(youtube_mode)
@@ -163,9 +162,6 @@ define_key(content_buffer_normal_keymap, "H", "back")
 define_key(content_buffer_normal_keymap, "j", "cmd_scrollLineDown")
 define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp")
 
-define_key(content_buffer_normal_keymap, "/", "isearch-forward");
-define_key(content_buffer_normal_keymap, "?", "isearch-backward");
-
 define_key(content_buffer_normal_keymap, "C-l", "find-alternate-url");
 
 define_key(content_buffer_normal_keymap, "C-t", "help-page");
@@ -196,6 +192,9 @@ interactive("copy-url",
             }
            );
 define_key(default_global_keymap, "C-c u", "copy-url");
+
+require("global-overlay-keymap");
+define_key_alias("C-o", "escape");
 
 // org-protocol stuff
 function org_capture (url, title, selection, window, cmd_str) {
@@ -291,3 +290,26 @@ interactive("sqlite-manager",
     function (I) {
         make_chrome_window('chrome://SQLiteManager/content/sqlitemanager.xul');
     });
+
+let (path = get_home_directory()) {
+  // add to load path
+  path.appendRelativePath(".conkerorrc");
+  path.appendRelativePath("facebook");
+  load_paths.unshift(make_uri(path).spec);
+
+  // include the library
+  require("conkeror-extended-facebook-mode.js");  
+};
+
+define_key(facebook_keymap, "1", "cefm-open-home");
+define_key(facebook_keymap, "2", "cefm-open-messages");
+define_key(facebook_keymap, "3", "cefm-open-notification");
+define_key(facebook_keymap, "C-M-o", "cefm-open-current-story-new-buffer");
+define_key(facebook_keymap, "C-O", "cefm-open-current-story-new-buffer-background");
+define_key(facebook_keymap, "C-M-m", "cefm-expand-content");
+
+// Chats
+cefm_scroll_gap = 50;
+define_key(facebook_keymap, "C-i", "cefm-cycle-conversations");
+define_key(facebook_keymap, "C-j", "cefm-scroll-up-current-coversation");
+define_key(facebook_keymap, "C-k", "cefm-scroll-down-current-coversation");

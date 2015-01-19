@@ -1,3 +1,6 @@
+Using Emcas org-mode babel facilities you can tangle the source blocks
+and create a javascript file. Default key binding for that: C-c C-v t
+
 # Conkeror Configuration
 
 ## Set Paths
@@ -6,7 +9,7 @@
 
 The directory where your theme directories are located
 
-    var themes = "/home/greg/conkerorrc/theme";
+    var themes = "~/.conkerorrc/theme";
 
 ## Adjust Load Paths
 
@@ -180,7 +183,6 @@ Firebug does not work in Conkeror but Firebug-Lite does
     require("gmail");
     require("feedly");
     require("twitter");
-    require("facebook");
     
     page_mode_deactivate(stackexchange_mode);
     page_mode_deactivate(youtube_mode)
@@ -249,13 +251,6 @@ Shows buffers as tabs
     define_key(content_buffer_normal_keymap, "j", "cmd_scrollLineDown")
     define_key(content_buffer_normal_keymap, "k", "cmd_scrollLineUp")
 
-### Searching
-
-Is also bound on C-s and C-r
-
-    define_key(content_buffer_normal_keymap, "/", "isearch-forward");
-    define_key(content_buffer_normal_keymap, "?", "isearch-backward");
-
 ### Alternate Url
 
     define_key(content_buffer_normal_keymap, "C-l", "find-alternate-url");
@@ -303,6 +298,13 @@ similar behavior
                     }
                    );
         define_key(default_global_keymap, "C-c u", "copy-url");
+
+### Esc alias
+
+There is a need for an ESC alias, see <http://truongtx.me/2013/08/08/using-esc-key-in-conkeror/>
+
+    require("global-overlay-keymap");
+    define_key_alias("C-o", "escape");
 
 ## Org-Protocol
 
@@ -414,3 +416,32 @@ Needs the sqlitemanager xpi installed!
         function (I) {
             make_chrome_window('chrome://SQLiteManager/content/sqlitemanager.xul');
         });
+
+## Facebook extended mode
+
+I use the extended mode from <http://truongtx.me/conkeror-extended-facebook-mode.html>
+
+    let (path = get_home_directory()) {
+      // add to load path
+      path.appendRelativePath(".conkerorrc");
+      path.appendRelativePath("facebook");
+      load_paths.unshift(make_uri(path).spec);
+    
+      // include the library
+      require("conkeror-extended-facebook-mode.js");  
+    };
+
+### Keybindings
+
+    define_key(facebook_keymap, "1", "cefm-open-home");
+    define_key(facebook_keymap, "2", "cefm-open-messages");
+    define_key(facebook_keymap, "3", "cefm-open-notification");
+    define_key(facebook_keymap, "C-M-o", "cefm-open-current-story-new-buffer");
+    define_key(facebook_keymap, "C-O", "cefm-open-current-story-new-buffer-background");
+    define_key(facebook_keymap, "C-M-m", "cefm-expand-content");
+    
+    // Chats
+    cefm_scroll_gap = 50;
+    define_key(facebook_keymap, "C-i", "cefm-cycle-conversations");
+    define_key(facebook_keymap, "C-j", "cefm-scroll-up-current-coversation");
+    define_key(facebook_keymap, "C-k", "cefm-scroll-down-current-coversation");

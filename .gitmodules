@@ -1,3 +1,6 @@
 [submodule "theme/conkeror-theme-zenburn"]
 	path = theme/conkeror-theme-zenburn
 	url = https://github.com/ivoarch/conkeror-theme-zenburn.git
+[submodule "facebook"]
+	path = facebook
+	url = https://github.com/tmtxt/conkeror-extended-facebook-mode.git
