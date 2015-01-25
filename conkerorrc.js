@@ -258,11 +258,13 @@ define_webjump("hag", "http://google.com/search?as_sitesearch=hackage.haskell.or
 define_webjump("hac", "http://hackage.haskell.org/package/%s");
 webjumps.g = webjumps.google;
 
+define_webjump("amazon", "http://www.amazon.de/s/ref=nb_sb_noss?field-keywords=%s", $alternative = "http://www.amazon.de");
 define_webjump(">conkeror", "http://conkeror.org/?action=fullsearch&context=60&value=%s&fullsearch=Text");
 delete webjumps.conkerorwiki;
 define_webjump("twit", "https://tweetdeck.twitter.com");
 define_webjump("gmail", "https://mail.google.com/mail/u/0/#inbox"); 
 define_webjump("le", "http://dict.leo.org/#/search=%s&searchLoc=0&resultOrder=basic&multiwordShowSingle=on");
+define_webjump("lf", "http://dict.leo.org/frde/index_de.html#/search=%s&searchLoc=0&resultOrder=basic&multiwordShowSingle=on");
 define_webjump("st","http://stackoverflow.com/search?q=%s", $alternative="http://stackoverflow.com");
 
 define_webjump("hay", "http://hayoo.fh-wedel.de/?query=%s");
